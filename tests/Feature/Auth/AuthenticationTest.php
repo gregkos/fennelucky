@@ -2,25 +2,14 @@
 
 use App\Models\User;
 
-test('users can authenticate using the login screen', function () {
+test('users can regenerate tokens', function () {
     $user = User::factory()->create();
 
-    $response = $this->post('/login', [
+    $response = $this->post('/token', [
         'email' => $user->email,
-        'password' => 'password',
     ]);
 
-    $this->assertAuthenticated();
-    $response->assertNoContent();
-});
-
-test('users can not authenticate with invalid password', function () {
-    $user = User::factory()->create();
-
-    $this->post('/login', [
-        'email' => $user->email,
-        'password' => 'wrong-password',
-    ]);
-
-    $this->assertGuest();
+    $this->assertDatabaseCount('users', 1);
+    $this->assertDatabaseCount('personal_access_tokens', 1);
+    $response->assertJsonFragment(['status' => 'success']);
 });

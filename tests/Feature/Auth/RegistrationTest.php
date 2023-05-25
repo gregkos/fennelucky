@@ -1,13 +1,11 @@
 <?php
 
-test('new users can register', function () {
-    $response = $this->post('/register', [
-        'name' => 'Test User',
+test('new users can create a token', function () {
+    $response = $this->post('/token', [
         'email' => 'test@example.com',
-        'password' => 'password',
-        'password_confirmation' => 'password',
     ]);
 
-    $this->assertAuthenticated();
-    $response->assertNoContent();
+    $this->assertDatabaseCount('users', 1);
+    $this->assertDatabaseCount('personal_access_tokens', 1);
+    $response->assertJsonFragment(['status' => 'success']);
 });
