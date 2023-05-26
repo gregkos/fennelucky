@@ -12,7 +12,7 @@ You are more than welcome to follow along and even contribute, but keep in mind 
 - Some sort of server to serve this
 - Some sort of mail catcher for email
 
-Most of these are covered by using [Sail](https://docs.laravel.com/10.x/sail), but feel free to use whatever you prefer.
+Most of these are covered by using [Sail](https://laravel.com/docs/10.x/sail), but feel free to use whatever you prefer.
 
 ## Development
 
