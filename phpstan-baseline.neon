@@ -4,8 +4,3 @@ parameters:
 			message: "#^Undefined variable\\: \\$this$#"
 			count: 1
 			path: routes/console.php
-
-		-
-			message: "#^Function something\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/Pest.php

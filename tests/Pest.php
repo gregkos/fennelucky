@@ -1,6 +1,8 @@
 <?php
 
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Str;
 use Tests\TestCase;
 
 /*
@@ -42,7 +44,10 @@ expect()->extend('toBeOne', function () {
 |
 */
 
-function something()
+function getNewUserAuthHeader(): array
 {
-    // ..
+    $user = User::factory()->create();
+    $token = $user->createToken(Str::random(), ['*'], now()->addWeek())->plainTextToken;
+
+    return ['Authorization' => "Bearer $token"];
 }

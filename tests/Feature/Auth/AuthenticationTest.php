@@ -13,3 +13,11 @@ test('users can regenerate tokens', function () {
     $this->assertDatabaseCount('personal_access_tokens', 1);
     $response->assertJsonFragment(['status' => 'success']);
 });
+
+test('an authenticated user can retrieve themselves', function () {
+    $auth = getNewUserAuthHeader();
+
+    $this->get('/api/user', $auth)
+        ->assertOk()
+        ->assertJsonStructure(['email']);
+});
