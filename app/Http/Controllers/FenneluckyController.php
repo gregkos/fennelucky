@@ -2,21 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UniqueNameRequest;
 use App\Models\Fennelucky;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 
 class FenneluckyController extends Controller
 {
-    public function store(Request $request): JsonResponse
+    public function store(UniqueNameRequest $request): JsonResponse
     {
-        $request->validate([
-            'name' => 'required|unique:fenneluckies,name,NULL,id,user_id,'.auth()->id(),
-        ]);
-
         $fennelucky = Fennelucky::create([
             'name' => $request->name,
-            'user_id' => auth()->id(),
+            'user_id' => $request->user()->id,
         ]);
 
         return response()->json($fennelucky, 201);

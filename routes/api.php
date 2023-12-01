@@ -19,6 +19,6 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::group(['prefix' => '/fenneluckies'], function () {
+Route::group(['prefix' => '/fenneluckies', 'middleware' => 'auth:sanctum'], function () {
     Route::post('/create', [FenneluckyController::class, 'store']);
 });
