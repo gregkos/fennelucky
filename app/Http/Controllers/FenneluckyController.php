@@ -10,7 +10,7 @@ class FenneluckyController extends Controller
 {
     public function store(UniqueNameRequest $request): JsonResponse
     {
-        $fennelucky = Fennelucky::create([
+        $fennelucky = Fennelucky::fromRequestInput([
             'name' => $request->name,
             'user_id' => $request->user()->id,
         ]);

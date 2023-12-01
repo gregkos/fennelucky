@@ -16,6 +16,14 @@ class Fennelucky extends Model
         'name',
     ];
 
+    public static function fromRequestInput(array $data)
+    {
+        return self::create([
+            'name' => $data['name'],
+            'user_id' => $data['user_id'],
+        ]);
+    }
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
